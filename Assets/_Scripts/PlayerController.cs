@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
-        girl = GetComponent<Animator>();
+       // girl = GetComponent<Animator>();
         ground = false;
         girl.Play("idle");
     }
@@ -39,14 +39,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Horizontal") == 0)
         {
             girl.Play("idle");
-           // girl.SetInteger("state", (int)"idle");
-
+            //girl.SetBool("idling", true);
+            //girl.SetBool("running", false);
+            //girl.SetBool("jumping", false);
         }
         //right
         if(Input.GetAxis("Horizontal") > 0)
         {
             girlSprite.flipX = false;
             girl.Play("run");
+            //girl.SetBool("running", true);
+            //girl.SetBool("idling", false);
+            //girl.SetBool("jumping", false);
             rbody.AddForce(Vector2.right * move);
         }
         //left
@@ -54,12 +58,18 @@ public class PlayerController : MonoBehaviour
         {
             girlSprite.flipX = true;
             girl.Play("run");
+            //girl.SetBool("running", true);
+            //girl.SetBool("idling", false);
+            //girl.SetBool("jumping", false);
             rbody.AddForce(Vector2.left * move);
         }
         //jump
         if(Input.GetAxis("Jump") > 0)
         {
             girl.Play("jump");
+            //girl.SetBool("jumping", true);
+            //girl.SetBool("running", false);
+            //girl.SetBool("idling", false);
             rbody.AddForce(Vector2.up * jump);
            // ground = false;
         }
