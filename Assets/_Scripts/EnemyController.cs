@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
 
     public float myTime = 0.0f;
     public float waitTime = 5;
+    public float distance = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +33,10 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         
-        if(transform.position.x - Player.transform.position.x <= 8f)
+        if(Player.transform.position.x <= distance)
         {
             enemyState = EnemyState.SHOOT;
-            turret.SetInteger("state", (int)PlayerState.SHOOT);
+            turret.SetInteger("state", (int)EnemyState.SHOOT);
             myTime += Time.deltaTime;
             if(myTime > waitTime)
             {
@@ -44,6 +45,10 @@ public class EnemyController : MonoBehaviour
                 myTime = 0.0f;
             }
             
+        }
+        else
+        {
+            enemyState = EnemyState.SPIN;
         }
 
 

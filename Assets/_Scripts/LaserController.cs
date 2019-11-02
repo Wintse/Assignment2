@@ -21,17 +21,17 @@ public class LaserController : MonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>();
 
-        rbody.velocity = -transform.up * speed;
+        rbody.velocity = transform.right * speed;
         //right
         if (Input.GetAxis("Horizontal") > 0)
         {
-            rbody.velocity = -transform.up * speed;
+            rbody.velocity = transform.right * speed;
         }
 
         //left
         if (Input.GetAxis("Horizontal") < 0)
         {
-            rbody.velocity = transform.up * speed;
+            rbody.velocity = -transform.right * speed;
         }
 
     }

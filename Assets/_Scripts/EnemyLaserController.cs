@@ -18,7 +18,7 @@ public class EnemyLaserController : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
-        rbody.velocity = transform.up * speed;
+        rbody.velocity = -transform.right * speed;
     }
 
     // Update is called once per frame
