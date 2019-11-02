@@ -5,12 +5,9 @@ using UnityEngine;
 namespace Util
 {
     [System.Serializable]
-    public enum PlayerState
+    public enum EnemyState
     {
-        IDLE,
-        RUN,
-        JUMP,
-        RUNSHOOT,
+        SPIN,
         SHOOT
     }
 }

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &441890787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 441890788}
+  m_Layer: 0
+  m_Name: laserspawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &441890788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441890787}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.28499985, y: -0.047500134, z: -52.39209}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 4972924184716538973}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2094923647872391166
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094923647872391166}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0725, y: -0.3344, z: -9.214855}
+  m_LocalPosition: {x: 0.083, y: -0.32, z: -9.214855}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4972924184716538973}
@@ -64,6 +94,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 3333934516918123304}
+  - {fileID: 441890788}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -104,7 +135,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 91d083d84e75eef40b9afd8afeba73b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -153,13 +184,17 @@ MonoBehaviour:
   rbody: {fileID: 4972924184716538971}
   move: 40
   jump: 100
+  laser: {fileID: 6933436008610114927, guid: a70fd7d74df12254aa1f3821ae8c0881, type: 3}
+  laserspawn: {fileID: 441890787}
+  fireRate: 0.5
+  isGrounded: 0
+  groundTarget: {fileID: 3333934516918123304}
   boundary:
     Top: 3.815
     Bottom: -2.463
     Right: 47.01
     Left: -16.911
-  grounded: 0
-  groundTarget: {fileID: 3333934516918123304}
+  time: 0
   jumpSound: {fileID: 1164054038}
 --- !u!50 &4972924184716538971
 Rigidbody2D:
