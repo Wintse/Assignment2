@@ -26,7 +26,11 @@ public class PlayerController : MonoBehaviour
 
     public Boundary boundary;
     public float myTime = 0.0f;
+    public Vector2 maximumVelocity = new Vector2(20.0f, 30.0f);
+
+    [Header("Sounds")]
     public AudioSource jumpSound;
+    public AudioSource treasure;
 
     public GameController gameController;
 
@@ -89,9 +93,9 @@ public class PlayerController : MonoBehaviour
         //right
         if ((Input.GetAxis("Horizontal") > 0) && (isGrounded))
         {
+            transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
             if (Input.GetButton("Fire1") && myTime > fireRate)
-            {
-                girlSprite.flipX = false;
+            {             
                 playerState = PlayerState.RUNSHOOT;
                 girl.SetInteger("state", (int)PlayerState.RUNSHOOT);
                 rbodyPlayer.AddForce(Vector2.right * move);
@@ -99,8 +103,7 @@ public class PlayerController : MonoBehaviour
                 myTime = 0.0f;
             }
             else
-            {
-                girlSprite.flipX = false;
+            {               
                 playerState = PlayerState.RUN;
                 girl.SetInteger("state", (int)PlayerState.RUN);
                 rbodyPlayer.AddForce(Vector2.right * move);
@@ -111,9 +114,9 @@ public class PlayerController : MonoBehaviour
         //left
         if ((Input.GetAxis("Horizontal") < 0) && (isGrounded))
         {
+            transform.localScale = new Vector3(-4.0f, 4.0f, 4.0f);
             if (Input.GetButton("Fire1") && myTime > fireRate)
             {
-                girlSprite.flipX = true;
                 playerState = PlayerState.RUNSHOOT;
                 girl.SetInteger("state", (int)PlayerState.RUNSHOOT);
                 rbodyPlayer.AddForce(Vector2.left * move);
@@ -122,7 +125,6 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                girlSprite.flipX = true;
                 playerState = PlayerState.RUN;
                 girl.SetInteger("state", (int)PlayerState.RUN);
                 rbodyPlayer.AddForce(Vector2.left * move);
@@ -139,8 +141,18 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             jumpSound.Play();
         }
+
+
+        rbodyPlayer.velocity = new Vector2(
+            Mathf.Clamp(rbodyPlayer.velocity.x, -maximumVelocity.x, maximumVelocity.x),
+            Mathf.Clamp(rbodyPlayer.velocity.y, -maximumVelocity.y, maximumVelocity.y)
+        );
+
     }
 
+    /// <summary>
+    /// this makes sure the player stays within the borders of the game
+    /// </summary>
     public void CheckBoundary()
     {
         rbodyPlayer.position = new Vector2(
