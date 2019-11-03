@@ -30,6 +30,66 @@ Transform:
   m_Father: {fileID: 4972924184716538973}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1531348951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1531348952}
+  - component: {fileID: 1531348954}
+  - component: {fileID: 1531348953}
+  m_Layer: 0
+  m_Name: taser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1531348952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531348951}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.24250007, y: -0.05249995, z: -116.16162}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_Children: []
+  m_Father: {fileID: 4972924184716538973}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1531348954
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531348951}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.05909443, y: 0.0059093237}
+  serializedVersion: 2
+  m_Radius: 0.24589479
+--- !u!114 &1531348953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531348951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5b2fc3346f7a64aa3d6602cec1c5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2094923647872391166
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,6 +135,7 @@ GameObject:
   - component: {fileID: 4972924184716538971}
   - component: {fileID: 4972924184716538970}
   - component: {fileID: 1164054038}
+  - component: {fileID: 1164054032}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -95,6 +156,7 @@ Transform:
   m_Children:
   - {fileID: 3333934516918123304}
   - {fileID: 441890788}
+  - {fileID: 1531348952}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -182,24 +244,21 @@ MonoBehaviour:
   girl: {fileID: 4972924184716538975}
   girlSprite: {fileID: 4972924184716538974}
   rbodyPlayer: {fileID: 4972924184716538971}
-  rbodyLaser: {fileID: 0}
-  move: 50
-  jump: 800
-  laser: {fileID: 3842822873979636370, guid: a70fd7d74df12254aa1f3821ae8c0881, type: 3}
-  laserspawn: {fileID: 441890787}
-  fireRate: 0.5
+  move: 27
+  jump: 1500
   isGrounded: 0
   groundTarget: {fileID: 3333934516918123304}
+  maximumVelocity: {x: 15, y: 15}
+  taserObject: {fileID: 1531348951}
   boundary:
     Top: 20.99
     Bottom: -3.02
     Right: 47.01
-    Left: -18.91
+    Left: -18.61
   myTime: 0
-  maximumVelocity: {x: 20, y: 20}
-  jumpSound: {fileID: 1164054038}
-  treasure: {fileID: 0}
   gameController: {fileID: 0}
+  facingDirection: 0
+  jumpSound: {fileID: 1164054038}
 --- !u!50 &4972924184716538971
 Rigidbody2D:
   serializedVersion: 4
@@ -333,3 +392,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!61 &1164054032
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972924184716538944}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.024381638, y: -0.093286216}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.71, y: 0.67}
+    newSize: {x: 0.71, y: 0.67}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.30505323, y: 0.48342764}
+  m_EdgeRadius: 0

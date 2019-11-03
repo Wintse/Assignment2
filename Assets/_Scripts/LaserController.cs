@@ -12,36 +12,33 @@ using Util;
 public class LaserController : MonoBehaviour
 {
     public float speed;
-    public GameObject Player;
-
+    //public PlayerController pscript;
+    public GameObject laser;
     private Rigidbody2D rbody;
 
     // Start is called before the first frame update
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
 
-        rbody.velocity = transform.right * speed;
-        //right
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            rbody.velocity = transform.right * speed;
-        }
+        //    //Instantiate(laser, laserspawn.position, laserspawn.rotation);
+        //    //laser.GetComponent<Rigidbody>().velocity = laser.transform.forward * 6;
 
-        //left
-        if (Input.GetAxis("Horizontal") < 0)
-        {
-            rbody.velocity = -transform.right * speed;
-        }
+        //    //Destroy(laser, 2.0f);
+
+        //}
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-         Destroy(this.gameObject, 2);
 
-        
+        Destroy(this.gameObject, 2);
+
+
     }
+
 }
