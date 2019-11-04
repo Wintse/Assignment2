@@ -6,13 +6,14 @@ public class DeathPlaneController : MonoBehaviour
 {
     public Transform activeCheckpoint;
     public GameObject player;
+    public GameObject checkpoint2;
     // Start is called before the first frame update
     //void Start()
     //{
-        
+
     //}
 
-    //// Update is called once per frame
+    ////// Update is called once per frame
     //void Update()
     //{
         
@@ -24,6 +25,13 @@ public class DeathPlaneController : MonoBehaviour
         {
             other.gameObject.transform.position = activeCheckpoint.position;
         }
+        //if (player.gameObject.CompareTag("Checkpoint"))
+        //{
+        //    Debug.Log("Checkpoint 2");
+        //    activeCheckpoint.position = checkpoint2.transform.position;
+        //}
+        
+        
     }
 
 }

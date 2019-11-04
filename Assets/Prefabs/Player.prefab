@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 441890788}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: laserspawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1531348952}
   - component: {fileID: 1531348954}
   - component: {fileID: 1531348953}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: taser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3333934516918123304}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: groundTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094923647872391166}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.083, y: -0.32, z: -9.214855}
+  m_LocalPosition: {x: 0.013, y: -0.318, z: -9.214855}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4972924184716538973}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4972924184716538970}
   - component: {fileID: 1164054038}
   - component: {fileID: 1164054032}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -244,20 +244,24 @@ MonoBehaviour:
   girl: {fileID: 4972924184716538975}
   girlSprite: {fileID: 4972924184716538974}
   rbodyPlayer: {fileID: 4972924184716538971}
-  move: 27
+  move: 30
   jump: 1500
   isGrounded: 0
   groundTarget: {fileID: 3333934516918123304}
-  maximumVelocity: {x: 15, y: 15}
+  maximumVelocity: {x: 10, y: 20}
+  hasWallAhead: 0
+  wallAhead: {fileID: 0}
   taserObject: {fileID: 1531348951}
   boundary:
     Top: 20.99
     Bottom: -3.02
-    Right: 47.01
+    Right: 136.6
     Left: -18.61
   myTime: 0
   gameController: {fileID: 0}
   facingDirection: 0
+  dp: {fileID: 0}
+  cp: {fileID: 0}
   jumpSound: {fileID: 1164054038}
 --- !u!50 &4972924184716538971
 Rigidbody2D:
@@ -293,8 +297,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02235499, y: -0.11177492}
-  m_Size: {x: 0.16128588, y: 0.48645014}
+  m_Offset: {x: 0.02235499, y: -0.10111065}
+  m_Size: {x: 0.16128588, y: 0.4651216}
   m_Direction: 0
 --- !u!82 &1164054038
 AudioSource:

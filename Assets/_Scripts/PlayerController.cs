@@ -18,11 +18,10 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public Transform groundTarget;
     public Vector2 maximumVelocity = new Vector2(20.0f, 30.0f);
+    public bool hasWallAhead;
+    public Transform wallAhead;
 
-   // [Header("taser settings")]
-    //public GameObject taser;
-   // public GameObject laserspawn;
-    //public float fireRate = 0.5f;
+    [Header("taser settings")]
     public GameObject taserObject;
 
     public Boundary boundary;
@@ -30,11 +29,13 @@ public class PlayerController : MonoBehaviour
     public GameController gameController;
     public bool facingDirection;
 
+
+
     [Header("Sounds")]
     public AudioSource jumpSound;
 
 
-
+    
     
     //Collider taser;
     
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics2D.BoxCast(
         transform.position, new Vector2(2.0f, 1.0f), 0.0f, Vector2.down, 1.0f, 1 << LayerMask.NameToLayer("Ground"));
 
+
         myTime += Time.deltaTime;
         //idle
         if (Input.GetAxis("Horizontal") == 0)
@@ -116,76 +118,89 @@ public class PlayerController : MonoBehaviour
         }
 
         //right
-        if ((Input.GetAxis("Horizontal") > 0) && (isGrounded))
+        if (Input.GetAxis("Horizontal") > 0)
         {
-            facingDirection = true;
-            transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
-            if (Input.GetButton("Fire1") )
-            {             
-                playerState = PlayerState.RUNSHOOT;
-                girl.SetInteger("state", (int)PlayerState.RUNSHOOT);
-                //rbodyPlayer.AddForce(Vector2.right * move);
-                rbodyPlayer.AddForce(new Vector2(1, 1) * move);
+            if(isGrounded)
+            {
+                facingDirection = true;
+                transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
+                if (Input.GetButton("Fire1") )
+                {             
+                    playerState = PlayerState.RUNSHOOT;
+                    girl.SetInteger("state", (int)PlayerState.RUNSHOOT);
+                    rbodyPlayer.AddForce(Vector2.right * move);
+                    //rbodyPlayer.AddForce(new Vector2(1, 1) * move);
 
-                taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
-            //    taser.isTrigger = true;
+                    taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
+                //    taser.isTrigger = true;
 
-                // taseSound.Play();
-                myTime = 0.0f;
+                    // taseSound.Play();
+                    myTime = 0.0f;
+                }
+                else
+                {               
+                    playerState = PlayerState.RUN;
+                    girl.SetInteger("state", (int)PlayerState.RUN);
+                    rbodyPlayer.AddForce(Vector2.right * move);
+                    //rbodyPlayer.AddForce(new Vector2(1, 1) * move);
+
+                    taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
+                //   taser.isTrigger = false;
+
+                }
             }
-            else
-            {               
-                playerState = PlayerState.RUN;
-                girl.SetInteger("state", (int)PlayerState.RUN);
-                //rbodyPlayer.AddForce(Vector2.right * move);
-                rbodyPlayer.AddForce(new Vector2(1, 1) * move);
-
-                taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
-            //   taser.isTrigger = false;
-
-            }
+            
 
         }
 
         //left
-        if ((Input.GetAxis("Horizontal") < 0) && (isGrounded))
+        if (Input.GetAxis("Horizontal") < 0)
         {
-            facingDirection = false;
-            transform.localScale = new Vector3(-4.0f, 4.0f, 4.0f);
-            if (Input.GetButton("Fire1"))
+            if(isGrounded)
             {
-                playerState = PlayerState.RUNSHOOT;
-                girl.SetInteger("state", (int)PlayerState.RUNSHOOT);
-                // rbodyPlayer.AddForce(Vector2.left * move);
-                rbodyPlayer.AddForce(new Vector2(-1, 1) * move);
+                facingDirection = false;
+                transform.localScale = new Vector3(-4.0f, 4.0f, 4.0f);
+                if (Input.GetButton("Fire1"))
+                {
+                    playerState = PlayerState.RUNSHOOT;
+                    girl.SetInteger("state", (int)PlayerState.RUNSHOOT);
+                    rbodyPlayer.AddForce(Vector2.left * move);
+                  //  rbodyPlayer.AddForce(new Vector2(-1, 1) * move);
 
-                taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
-             //    taser.isTrigger = true;
+                    taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
+                 //    taser.isTrigger = true;
 
-                //taseSound.Play();
-                myTime = 0.0f;
+                    //taseSound.Play();
+                    myTime = 0.0f;
+                }
+                else
+                {
+                    playerState = PlayerState.RUN;
+                    girl.SetInteger("state", (int)PlayerState.RUN);
+                    rbodyPlayer.AddForce(Vector2.left * move);
+                 //   rbodyPlayer.AddForce(new Vector2(-1, 1) * move);
+
+                    taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
+                 //   taser.isTrigger = false;
+                }
             }
-            else
-            {
-                playerState = PlayerState.RUN;
-                girl.SetInteger("state", (int)PlayerState.RUN);
-                //rbodyPlayer.AddForce(Vector2.left * move);
-                rbodyPlayer.AddForce(new Vector2(-1, 1) * move);
-
-                taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
-             //   taser.isTrigger = false;
-            }
+            
 
         }
 
         //jump
-        if ((Input.GetAxis("Jump") > 0) && (isGrounded))
+        if (Input.GetAxis("Jump") > 0)
         {
-            playerState = PlayerState.JUMP;
-            girl.SetInteger("state", (int)PlayerState.JUMP);
-            rbodyPlayer.AddForce(Vector2.up * jump);
-            isGrounded = false;
-            jumpSound.Play();
+            if(isGrounded)
+            {
+                playerState = PlayerState.JUMP;
+                girl.SetInteger("state", (int)PlayerState.JUMP);
+                rbodyPlayer.AddForce(Vector2.up * jump);
+                isGrounded = false;
+                jumpSound.Play();
+
+            }
+            
         }
 
 
@@ -193,6 +208,8 @@ public class PlayerController : MonoBehaviour
             Mathf.Clamp(rbodyPlayer.velocity.x, -maximumVelocity.x, maximumVelocity.x),
             Mathf.Clamp(rbodyPlayer.velocity.y, -maximumVelocity.y, maximumVelocity.y)
         );
+
+       
 
     }
 
@@ -232,10 +249,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (gameController.health > 1)
+            {
+                gameController.health--;
+            }
+            else
+            {
+                //if health is = 0, destroy the player
+                gameController.health = 0;
+                Destroy(other.gameObject);
+            }
+        }
+
         if(other.gameObject.CompareTag("DeathPlane"))
         {
             gameController.health--;
         }
+
+
+
 
     }
 
