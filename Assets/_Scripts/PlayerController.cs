@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
+using UnityEngine.SceneManagement;
+
 public class PlayerController : MonoBehaviour
 {
     public PlayerState playerState;
@@ -18,8 +20,6 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public Transform groundTarget;
     public Vector2 maximumVelocity = new Vector2(20.0f, 30.0f);
-    public bool hasWallAhead;
-    public Transform wallAhead;
 
     [Header("taser settings")]
     public GameObject taserObject;
@@ -32,13 +32,14 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Sounds")]
-    public AudioSource jumpSound;
+    private AudioSource _jumpSound;
+    private AudioSource _taserSound;
+    private AudioSource _chestSound;
+    private AudioSource _hurtSound;
+    private AudioSource _fallSound;
 
+    
 
-    
-    
-    //Collider taser;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -47,15 +48,13 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         playerState = PlayerState.IDLE;
 
-        
-        
-        //taser = GameObject.getComponent(Collider).isTriggeer = true;
-
-
-
+        _jumpSound = gameController.audioSource[(int)Sound.JUMPING];
+        _taserSound = gameController.audioSource[(int)Sound.TASE];
+        _chestSound = gameController.audioSource[(int)Sound.TREASURE];
+        _hurtSound = gameController.audioSource[(int)Sound.HURT];
+        _fallSound = gameController.audioSource[(int)Sound.FALL];
 
         facingDirection = true;
-       // float lspeed = GameObject.Find("Laser").GetComponent<LaserController>().speed;
 
         //finding the Game Controller by the tag GameController
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
@@ -100,8 +99,9 @@ public class PlayerController : MonoBehaviour
 
 
                 taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = true ;
-            //   taser.isTrigger = true;
-                // taseSound.Play();
+            
+
+                _taserSound.Play();
             }
             else
             {
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
 
                 taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
-            //   taser.isTrigger = false;
+           
 
             }
 
@@ -132,9 +132,9 @@ public class PlayerController : MonoBehaviour
                     //rbodyPlayer.AddForce(new Vector2(1, 1) * move);
 
                     taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
-                //    taser.isTrigger = true;
+                   
 
-                    // taseSound.Play();
+                    _taserSound.Play();
                     myTime = 0.0f;
                 }
                 else
@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
                     taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
                  //    taser.isTrigger = true;
 
-                    //taseSound.Play();
+                    _taserSound.Play();
                     myTime = 0.0f;
                 }
                 else
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
                  //   rbodyPlayer.AddForce(new Vector2(-1, 1) * move);
 
                     taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
-                 //   taser.isTrigger = false;
+                
                 }
             }
             
@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
                 girl.SetInteger("state", (int)PlayerState.JUMP);
                 rbodyPlayer.AddForce(Vector2.up * jump);
                 isGrounded = false;
-                jumpSound.Play();
+                _jumpSound.Play();
 
             }
             
@@ -231,44 +231,41 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Chest"))
         {
             gameController.collected++;
-
+            _chestSound.Play();
             Destroy(other.gameObject);
         }
         
-        if(other.gameObject.CompareTag("EnemyLaser"))
-        {
-            if (gameController.health > 1)
-            {
-                gameController.health--;
-            }
-            else
-            {
-                //if health is = 0, destroy the player
-                gameController.health = 0;
-                Destroy(other.gameObject);
-            }
-        }
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-            if (gameController.health > 1)
+            if(taserObject.gameObject.GetComponent<CircleCollider2D>().isTrigger == false)
             {
-                gameController.health--;
+                if (gameController.health > 1)
+                {
+                    _hurtSound.Play();
+                    gameController.health--;
+                }
+                else
+                {
+                    //if health is = 0, destroy the player
+                    gameController.health = 0;
+                    
+                    
+                }
             }
-            else
-            {
-                //if health is = 0, destroy the player
-                gameController.health = 0;
-                Destroy(other.gameObject);
-            }
+            
         }
 
         if(other.gameObject.CompareTag("DeathPlane"))
         {
+            _fallSound.Play();
             gameController.health--;
         }
 
-
+        if(other.gameObject.CompareTag("FinishArea"))
+        {
+            SceneManager.LoadScene("End");
+        }
 
 
     }

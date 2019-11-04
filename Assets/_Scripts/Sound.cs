@@ -9,6 +9,11 @@ using UnityEngine;
         NONE = -1,
         JUMPING,
         TASE,
-        TREASURE
+        TREASURE,
+        NIGHTESCAPE,
+        EXPLOSION,
+        HURT,
+        FALL,
+        NUM
     }
 

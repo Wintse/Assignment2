@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &441890787
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 441890788}
-  m_Layer: 14
-  m_Name: laserspawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &441890788
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 441890787}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.28499985, y: -0.047500134, z: -52.39209}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children: []
-  m_Father: {fileID: 4972924184716538973}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1531348951
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +30,7 @@ Transform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 4972924184716538973}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1531348954
 CircleCollider2D:
@@ -75,9 +45,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05909443, y: 0.0059093237}
+  m_Offset: {x: -0.55950606, y: 0.04722756}
   serializedVersion: 2
-  m_Radius: 0.24589479
+  m_Radius: 0.25507796
 --- !u!114 &1531348953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5b2fc3346f7a64aa3d6602cec1c5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
 --- !u!1 &2094923647872391166
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +85,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094923647872391166}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.013, y: -0.318, z: -9.214855}
+  m_LocalPosition: {x: 0.0202, y: -0.3226, z: -9.214855}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4972924184716538973}
@@ -155,7 +126,6 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 3333934516918123304}
-  - {fileID: 441890788}
   - {fileID: 1531348952}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -244,25 +214,20 @@ MonoBehaviour:
   girl: {fileID: 4972924184716538975}
   girlSprite: {fileID: 4972924184716538974}
   rbodyPlayer: {fileID: 4972924184716538971}
-  move: 30
+  move: 35
   jump: 1500
   isGrounded: 0
   groundTarget: {fileID: 3333934516918123304}
   maximumVelocity: {x: 10, y: 20}
-  hasWallAhead: 0
-  wallAhead: {fileID: 0}
   taserObject: {fileID: 1531348951}
   boundary:
     Top: 20.99
     Bottom: -3.02
-    Right: 136.6
+    Right: 183
     Left: -18.61
   myTime: 0
   gameController: {fileID: 0}
   facingDirection: 0
-  dp: {fileID: 0}
-  cp: {fileID: 0}
-  jumpSound: {fileID: 1164054038}
 --- !u!50 &4972924184716538971
 Rigidbody2D:
   serializedVersion: 4
@@ -409,7 +374,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.024381638, y: -0.093286216}
+  m_Offset: {x: 0.035859108, y: -0.093286216}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -420,5 +385,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.30505323, y: 0.48342764}
+  m_Size: {x: 0.25914574, y: 0.48342764}
   m_EdgeRadius: 0
